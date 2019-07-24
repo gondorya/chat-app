@@ -12,13 +12,18 @@ const publicDirectory = path.join(__dirname, '../public');
 
 app.use(express.static(publicDirectory));
 
-let message = 'Hello';
+let message = 'Hello!';
 
 io.on('connection', (socket) => {
 	socket.emit('message', message);
+	socket.broadcast.emit('message', 'Say hello to new user');
 
 	socket.on('sendMessage', (message) => {
 		io.emit('message', message);
+	});
+
+	socket.on('disconnect', () => {
+		io.emit('message', 'A user has left');
 	});
 });
 
