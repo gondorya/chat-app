@@ -2,9 +2,16 @@
 <html>
   <head>
     <title>Chat App</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
   </head>
   <body>
-    <h1>Hello</h1>
+    <div class="container">
+      <h1 class="title">Chatting ;)</h1>
+      <form class="form" id="messageForm">
+        <input class="form__input form__input--message" type="text" name="message" id="message" placeholder="message...">
+        <button type="submit" class="btn btn--send">Send</button>
+      </form>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>
   </body>
