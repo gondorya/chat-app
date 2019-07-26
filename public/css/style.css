@@ -86,3 +86,7 @@ body {
 	max-width: 60%;
 	min-width: 100px;
 }
+
+.message__link {
+	color: #fff;
+}
