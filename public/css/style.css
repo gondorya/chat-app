@@ -36,6 +36,22 @@ body {
 	text-transform: uppercase;
 }
 
+.btn--location {
+	line-height: 30px;
+	padding: 5px 10px;
+	text-transform: uppercase;
+	float: right;
+}
+
+.btn--location::after {
+	content: "\f124";
+	display: inline-block;
+	font-family: 'FontAwesome';
+	margin-left: 8px;
+	font-size: 20px;
+	vertical-align: middle;
+}
+
 .form,
 .box {
 	max-width: 80%;
@@ -91,9 +107,13 @@ body {
 	color: #fff;
 }
 
-.message__time {
-	color: rgb(194, 192, 192);
-	margin: 5px;
+.message__author {
+	font-weight: bold;
+}
+
+.message__info {
 	font-size: 10px;
 	line-height: 1.4;
+	margin: 0;
+	color: rgb(194, 192, 192);
 }

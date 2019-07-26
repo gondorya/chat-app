@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Chat App</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
   </head>
@@ -15,7 +16,9 @@
         <input class="form__input form__input--message" type="text" name="message" id="message" placeholder="message...">
         <button type="submit" class="btn btn--send">Send</button>
       </form>
-      <button type="button" class="btn" id="location">Send Location</button>
+      <div class="box">
+          <button type="button" class="btn btn--location" id="location">Send Location</button>
+      </div>
     </div>
 
     <script id="messageTemplate" type="text/html">
@@ -23,16 +26,16 @@
           <div class="message__box">
               <p>{{message}}</p>  
           </div>
-          <p class="message__time">send: {{time}}</p>
+          <p class="message__info"><span class="message__author">Some name</span>, <span class="message__time">send: {{time}}</span></p>
           <div class="clearfix"></div>
       </div>
     </script>
     <script id="locationTemplate" type="text/html">
       <div class="message message--location">
           <div class="message__box">
-              <p><a href={{location}} class="message__link" target="_blank">Check my location</a></p>
+            <p><a href={{location}} class="message__link" target="_blank">Check my location</a></p>
           </div>
-          <p class="message__time">send: {{time}}</p>
+          <p class="message__info"><span class="message__author">Some name</span>, <span class="message__time">send: {{time}}</span></p>
           <div class="clearfix"></div>
       </div>
     </script>
