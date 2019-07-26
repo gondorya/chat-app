@@ -52,6 +52,10 @@ body {
 	vertical-align: middle;
 }
 
+.btn--full {
+	width: 100%;
+}
+
 .form,
 .box {
 	max-width: 80%;
@@ -77,12 +81,26 @@ body {
 	line-height: 25px;
 }
 
+.form__input--full {
+	width: 100%;
+	line-height: 25px;
+}
+
+.form--join {
+	width: 100%;
+	max-width: 300px;
+}
+
 .container {
 	max-width: 1024px;
 	padding: 25px 20px;
 	margin: 0 auto 40px;
 	background: #fff;
 	min-height: calc(100vh - 40px);
+}
+
+.container--centered {
+	text-align: center;
 }
 
 .title {
