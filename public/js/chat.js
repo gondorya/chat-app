@@ -6,22 +6,40 @@ const $messageFormInput = $messageForm.querySelector('input');
 const $messageFormButton = $messageForm.querySelector('button');
 const $locationButton = document.querySelector('#location');
 const $messages = document.querySelector('#messages');
+const $users = document.querySelector('#users');
 
 //templates
 const messageTemplate = document.querySelector('#messageTemplate').innerHTML;
 const locationTemplate = document.querySelector('#locationTemplate').innerHTML;
+const userListTemplate = document.querySelector('#userListTemplate').innerHTML;
+
+//options
+const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true });
+
+const autoScroll = () => {
+	const visibleHeight = $messages.offsetHeight;
+	const conatinerHeight = $messages.scrollHeight;
+
+	if (visibleHeight <= conatinerHeight) {
+		$messages.scrollTop = conatinerHeight;
+	}
+};
 
 socket.on('message', (props) => {
-	const { message, date } = props;
+	const { message, date, id, username = 'Admin' } = props;
+	const className = id === socket.id ? 'is-mine' : '';
 	const time = moment(date).format('MMM-DD-YYYY, hh:mm a');
-	const html = Mustache.render(messageTemplate, { message, time });
+	console.log(message);
+	const html = Mustache.render(messageTemplate, { message, time, className, username });
 	$messages.insertAdjacentHTML('beforeend', html);
+	autoScroll();
 });
 
 socket.on('locationMessage', (props) => {
-	const { location, date } = props;
+	const { location, date, id, username } = props;
+	const className = id === socket.id ? 'is-mine' : '';
 	const time = moment(date).format('MMM-DD-YYYY, hh:mm a');
-	const html = Mustache.render(locationTemplate, { location, time });
+	const html = Mustache.render(locationTemplate, { location, time, className, username });
 	$messages.insertAdjacentHTML('beforeend', html);
 });
 
@@ -58,4 +76,18 @@ $locationButton.addEventListener('click', () => {
 			console.log('Location shared');
 		});
 	});
+});
+
+socket.emit('join', { username, room }, (error) => {
+	if (error) {
+		alert(error);
+		return (location.href = '/');
+	}
+});
+
+socket.on('roomData', (props) => {
+	const { room, users } = props;
+	console.log(users);
+	const html = Mustache.render(userListTemplate, { users, room });
+	$users.innerHTML = html;
 });
